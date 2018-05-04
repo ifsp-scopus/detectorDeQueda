@@ -14,7 +14,7 @@ import com.ifsp.detectorqueda.helpers.LogHelper;
 public class DetectorQueda implements SensorEventListener{
     private Context contexto;
     private SensorManager sensorManager;
-    private Acelerometro acelerometro;
+    public Acelerometro acelerometro;
 
     /**
      *  Inicializa os objetos necessários para deteção da queda, solicita o service do sensor do
@@ -43,7 +43,8 @@ public class DetectorQueda implements SensorEventListener{
      * @author  Denis Magno.
      */
     private boolean detectarQueda(){
-        if(this.acelerometro.getyAxis() < 8 && this.acelerometro.getzAxis() > 3){
+        Log.e("MAGNITUDE", this.magnitude().toString());
+        if(this.magnitude() > 13){
             return true;
         }else{
             return false;
@@ -60,6 +61,7 @@ public class DetectorQueda implements SensorEventListener{
         Double magnitude = Math.sqrt(   (this.acelerometro.getxAxis() * this.acelerometro.getxAxis()) +
                 (this.acelerometro.getyAxis() * this.acelerometro.getyAxis()) +
                 (this.acelerometro.getzAxis() * this.acelerometro.getzAxis()));
+
         return magnitude;
     }
 
