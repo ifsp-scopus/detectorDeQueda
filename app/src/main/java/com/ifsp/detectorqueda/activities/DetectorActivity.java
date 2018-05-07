@@ -20,20 +20,5 @@ public class DetectorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detector);
 
         this.detector = new DetectorQueda(this);
-        this.tvXAxis = (TextView)this.findViewById(R.id.tvXAxisValor);
-        this.tvYAxis = (TextView)this.findViewById(R.id.tvXAxisValor);
-        this.tvZAxis = (TextView)this.findViewById(R.id.tvXAxisValor);
-        this.tvMagnitude = (TextView)this.findViewById(R.id.tvMagnitudeValor);
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        this.tvXAxis.setText(this.detector.acelerometro.getxAxis().toString());
-        this.tvYAxis.setText(this.detector.acelerometro.getyAxis().toString());
-        this.tvZAxis.setText(this.detector.acelerometro.getzAxis().toString());
-        this.tvMagnitude.setText(this.detector.acelerometro.getxAxis().toString());
-    }
-
 }

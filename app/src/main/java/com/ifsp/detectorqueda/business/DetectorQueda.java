@@ -11,10 +11,13 @@ import android.widget.Toast;
 import com.ifsp.detectorqueda.beans.Acelerometro;
 import com.ifsp.detectorqueda.helpers.LogHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetectorQueda implements SensorEventListener{
     private Context contexto;
     private SensorManager sensorManager;
-    public Acelerometro acelerometro;
+    private List<Acelerometro> janela;
 
     /**
      *  Inicializa os objetos necessários para deteção da queda, solicita o service do sensor do
@@ -25,8 +28,8 @@ public class DetectorQueda implements SensorEventListener{
      * @author          Denis Magno.
      */
     public DetectorQueda(Context contexto){
-        this.acelerometro = new Acelerometro();
         this.contexto = contexto;
+        this.janela = new ArrayList<Acelerometro>();
 
         this.sensorManager = (SensorManager) this.contexto.getSystemService(Context.SENSOR_SERVICE);
 
@@ -39,48 +42,98 @@ public class DetectorQueda implements SensorEventListener{
     /**
      *  Verifica se houve uma possível queda do usuário com base nas alterações dos valores do acelerômetro.
      *
-     * @return  Verdadeiro se for detectado uma queda. Falso se não for detectado uma queda.
-     * @author  Denis Magno.
+     * @param dadosAcelerometro Dados do acelerômetro.
+     * @return                  Verdadeiro se for detectado uma queda. Falso se não for detectado uma queda.
+     * @author                  Denis Magno.
      */
-    private boolean detectarQueda(){
-        Log.e("MAGNITUDE", this.magnitude().toString());
-        if(this.magnitude() > 13){
+    private boolean detectarQueda(Acelerometro dadosAcelerometro){
+        //Log.e("MAGNITUDE", this.magnitude().toString());
+        Log.e("ACELERAÇÃO DA GRAVIDADE", this.getMagnitudeAceleracao(dadosAcelerometro).toString());
+        if(this.getMagnitudeAceleracao(dadosAcelerometro) > 2){
+            this.organizaJanela(dadosAcelerometro);
             return true;
         }else{
+            this.montaJanela(dadosAcelerometro);
             return false;
         }
     }
 
     /**
-     *  Calcula a magnitude da queda utilizando dados do acelerômetro já recebidos pela função 'onSensorChanged'.
+     *  Organiza janela caso seja encontrado uma possível queda para manter valor de magnitude no meio da lista.
      *
-     * @return  Magnitude da queda.
-     * @author  Denis Magno.
+     * @param dadosAcelerometro Dados do acelerômetro.
+     * @author                  Denis Magno.
      */
-    private Double magnitude(){
-        Double magnitude = Math.sqrt(   (this.acelerometro.getxAxis() * this.acelerometro.getxAxis()) +
-                (this.acelerometro.getyAxis() * this.acelerometro.getyAxis()) +
-                (this.acelerometro.getzAxis() * this.acelerometro.getzAxis()));
+    private void organizaJanela(Acelerometro dadosAcelerometro){
+        for(int i = 0; i < 149; i++){
+            //Remove último elemento caso a janela já tenha atingido seu valor total
+            if(this.janela.size() == 300){
+                this.janela.remove(299);
+            }
 
-        return magnitude;
+            //Continua buscando valores do acelerômetro para popular o resto da janela.
+            /**
+             * TODO
+             */
+            Acelerometro aux = new Acelerometro();
+            aux.setxAxis((float) 0);
+            aux.setyAxis((float) 0);
+            aux.setzAxis((float) 0);
+            this.janela.add(0, aux);
+        }
+    }
+
+    /**
+     *  Monta janela de deteccção de queda.
+     *
+     * @param dadosAcelerometro Dados do acelerômetro.
+     * @author                  Denis Magno.
+     */
+    private void montaJanela(Acelerometro dadosAcelerometro){
+        //Remove último elemento caso a janela já tenha atingido seu valor total
+        if(this.janela.size() == 300){
+            this.janela.remove(299);
+        }
+
+        //Adiciona dados capturados do acelerometro no primeiro elemento da lista.
+        this.janela.add(0, dadosAcelerometro);
+    }
+
+    /**
+     *  Calcula a magnitude da aceleração da possível queda utilizando dados do acelerômetro.
+     *
+     * @param dadosAcelerometro Dados do acelerômetro.
+     * @return                  Magnitude da aceleração da possível queda.
+     * @author                  Denis Magno.
+     */
+    private Double getMagnitudeAceleracao(Acelerometro dadosAcelerometro){
+        //Calcula magnitude da queda.
+        Double magnitude = Math.sqrt(   Math.pow(dadosAcelerometro.getxAxis(), 2) +
+                                        Math.pow(dadosAcelerometro.getyAxis(), 2) +
+                                        Math.pow(dadosAcelerometro.getzAxis(), 2));
+
+        //Calcula aceleração da magnitude da queda.
+        Double aceleracao = magnitude / 9.8;
+
+        return aceleracao;
     }
 
     /**
      *  Escuta o sensor proposto para detecção(Acelerômetro).
-     *  É chamada automaticamente caso o sensor recebe um novo Evento(Seus valores sejam alterados.
+     * É chamada automaticamente caso o sensor recebe um novo Evento(Seus valores sejam alterados.
      *
      * @param event Evento do sensor alterado.
      * @author      Denis Magno.
      */
     @Override
     public void onSensorChanged(SensorEvent event) {
-        this.acelerometro.setxAxis(event.values[0]);
-        this.acelerometro.setyAxis(event.values[1]);
-        this.acelerometro.setzAxis(event.values[2]);
-        this.acelerometro.setTempoOcorrido(event.timestamp);
+        Acelerometro dadosAcelerometro = new Acelerometro();
+        dadosAcelerometro.setxAxis(event.values[0]);
+        dadosAcelerometro.setyAxis(event.values[1]);
+        dadosAcelerometro.setzAxis(event.values[2]);
 
-        if(this.detectarQueda()){
-            Log.w("Detector de queda","Queda detectada! "+event.timestamp);
+        if(this.detectarQueda(dadosAcelerometro)){
+            Log.w("Detector de queda","Queda detectada! " + event.timestamp);
             new LogHelper().cadastrarQueda(contexto);
             Toast.makeText(this.contexto, "Queda detectada", Toast.LENGTH_SHORT).show();
         }
