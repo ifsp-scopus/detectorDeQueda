@@ -1,5 +1,6 @@
 package com.ifsp.detectorqueda.activities;
 
+import android.hardware.SensorEventListener;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -9,10 +10,6 @@ import com.ifsp.detectorqueda.business.DetectorQueda;
 
 public class DetectorActivity extends AppCompatActivity {
     private DetectorQueda detector;
-    private TextView tvXAxis;
-    private TextView tvYAxis;
-    private TextView tvZAxis;
-    private TextView tvMagnitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
