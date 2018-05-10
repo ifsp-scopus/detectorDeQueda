@@ -169,6 +169,10 @@ public class DetectorQueda implements SensorEventListener{
         // como uma queda.
         if(this.janela.get(ultrapassagemMagnitude).getMagnitudeAceleracao() > 2){
             new LogHelper().cadastrarJanelaQueda(this.contexto, this.janela);
+
+            //  Descarta aquela janela se encontrar uma queda para evitar falsos positivos que podem
+            // acontecer com dados posteriores a queda livre encontrada.
+            this.janela.clear();
             return 1;
         }else{
             return 0;
