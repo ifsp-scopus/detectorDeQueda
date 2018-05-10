@@ -7,82 +7,13 @@
     tools:context=".activities.DetectorActivity">
 
     <TextView
-        android:id="@+id/tvXAxis"
+        android:id="@+id/tvInformacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:text="Valor de x:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvYAxis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="50dp"
-        android:text="Valor de y:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvZAxis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="50dp"
-        android:text="Valor de z:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvMagnitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:layout_marginLeft="50dp"
-        android:text="Magnitude:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvXAxisValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="130dp"
-        android:text="  "
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvYAxisValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="130dp"
-        android:text="  "
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvZAxisValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="130dp"
-        android:text="  "
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <TextView
-        android:id="@+id/tvMagnitudeValor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:layout_marginLeft="130dp"
-        android:text="  "
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:text="Algoritmo de detecção de quedas em andamento..."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

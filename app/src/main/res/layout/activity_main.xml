@@ -6,25 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <EditText
-        android:id="@+id/etNome"
-        android:layout_width="317dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Nome"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/bLogin"
+        android:id="@+id/bIniciarDeteccaoQueda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:onClick="bLogar"
-        android:text="Login"
+        android:layout_marginTop="50dp"
+        android:onClick="bIniciarDeteccaoQueda"
+        android:text="Iniciar Detecção de Queda!"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

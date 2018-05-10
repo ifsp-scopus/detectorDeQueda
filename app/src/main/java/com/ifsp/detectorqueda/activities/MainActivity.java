@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view  Objeto que representa o botão que foi clicado.
      * @author      Denis Magno.
      */
-    public void bLogar(View view){
+    public void bIniciarDeteccaoQueda(View view){
         Intent in = new Intent(this, DetectorActivity.class);
         this.startActivity(in);
     }
