@@ -54,7 +54,7 @@ public class LogHelper {
             FileOutputStream arquivo = contexto.openFileOutput("logQuedas.txt", Context.MODE_APPEND);
 
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SS");
-            String linha = f.format(new Date()) + " - Possível queda encontrada!\n";
+            String linha = f.format(new Date()) + " - Possível queda registrada!\n";
 
             arquivo.write(linha.getBytes());
             arquivo.close();
@@ -71,9 +71,11 @@ public class LogHelper {
     }
 
     /**
-     *  Cadastra possível queda em arquivo de LOG do sistema para posterior visualização.
+     *  Cadastra janela de dados de possível queda em arquivo de LOG no formato .csv  para posterior
+     * visualização e análise.
      *
      * @param contexto  Contexto do sistema que chamou a função.
+     * @param janela    Lista de dados do acelerômetro recebidos daquela janela
      * @author          Denis Magno.
      */
     public void cadastrarJanelaQueda(Context contexto, List<Acelerometro> janela){
@@ -81,14 +83,15 @@ public class LogHelper {
             FileOutputStream arquivo = contexto.openFileOutput("logJanelaQueda.csv", Context.MODE_APPEND);
 
             SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SS");
-            //arquivo.write(f.format(new Date()).toString().getBytes());
-            //arquivo.write("\n".getBytes());
+            arquivo.write(f.format(new Date()).toString().getBytes());
+            arquivo.write("\n".getBytes());
 
             for(int i = 0; i < janela.size(); i++){
                 String linha = janela.get(i).getMagnitudeAceleracao()+ ";\n";
 
                 arquivo.write(linha.getBytes());
             }
+            arquivo.write("\n".getBytes());
 
             arquivo.close();
         }catch(FileNotFoundException ex){

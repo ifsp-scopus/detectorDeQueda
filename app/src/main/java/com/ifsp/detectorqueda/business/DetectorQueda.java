@@ -16,15 +16,15 @@ import java.util.List;
 
 public class DetectorQueda implements SensorEventListener{
     private Context contexto;
-    public SensorManager sensorManager;
+    private SensorManager sensorManager;
+    private Sensor acelerometro;
     private List<Acelerometro> janela;
     private Integer maxJanela;
+    private Integer elementoInicial;
     private static Integer contagem = 0;
 
     /**
-     *  Inicializa os objetos necessários para deteção da queda, solicita o service do sensor do
-     * celular, seleciona o sensor a ser utilizado(Acelerômetro) e retorna feedback para usuário
-     * informando da iniciação da detecção de queda.
+     *  Inicializa os objetos necessários para deteção da queda.
      *
      * @param contexto  Contexto do sistema que chamou a função.
      * @author          Denis Magno.
@@ -34,13 +34,44 @@ public class DetectorQueda implements SensorEventListener{
         this.janela = new ArrayList<Acelerometro>();
         this.janela.clear();
         this.maxJanela = 300;
+        this.elementoInicial = this.maxJanela - 1;
+    }
 
+    /**
+     *  Solicita o serviço do sensor do celular, seleciona o sensor a ser utilizado(Acelerômetro) e
+     * inicia uma instância de SensorEventListener para o sensor solicitado.
+     *
+     * @return  Verdadeiro se iniciar normalmente o sensor. Falso se ocorrer algum erro na iniciação
+     * do sensor.
+     * @author  Denis Magno.
+     */
+    public boolean iniciar(){
         this.sensorManager = (SensorManager) this.contexto.getSystemService(Context.SENSOR_SERVICE);
 
-        Sensor acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        this.sensorManager.registerListener((SensorEventListener) this, acelerometro, SensorManager.SENSOR_DELAY_GAME);
+        this.acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        Toast.makeText(contexto, "Detector de queda iniciado!", Toast.LENGTH_SHORT).show();
+        if(this.sensorManager.registerListener((SensorEventListener) this, acelerometro, SensorManager.SENSOR_DELAY_GAME)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     *  Pausa os sensores, uma vez iniciados.
+     *
+     * @return  Verdadeiro se pausar normalmente os sensores. Falso se ocorrer algum erro na parada
+     * dos sensores.
+     * @author  Denis Magno.
+     */
+    public boolean pausar(){
+        if(this.sensorManager != null && this.acelerometro != null) {
+            this.sensorManager.unregisterListener(this, this.acelerometro);
+
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -52,24 +83,22 @@ public class DetectorQueda implements SensorEventListener{
      */
     @Override
     public void onSensorChanged(SensorEvent event) {
+        //Monta janela com dados estruturados no objeto 'Acelerometro' vindos do sensor definido.
         this.montaJanela(new Acelerometro(event.values[0], event.values[1], event.values[2], event.timestamp));
 
-        Integer resultado = this.detectaQuedaLivre();
         DetectorQueda.contagem++;
         Log.e(DetectorQueda.contagem.toString(),".");
+
+        // Roda algoritmo de detecção de queda para janela montada.
+        Integer resultado = this.detectaQuedaLivre();
         if(resultado == 1){
-            //Log.w("Detector de queda","Queda detectada! " + event.timestamp);
             new LogHelper().cadastrarQueda(contexto);
             Toast.makeText(this.contexto, "Queda detectada", Toast.LENGTH_SHORT).show();
-            //Log.e("QUEDA:","Queda detectada!");
-        }
-        if(resultado == 0){
-            Log.e("QUEDA:","Queda não detectada!");
-        }
-        if(resultado == -1){
+            Log.e("QUEDA:","Queda detectada!");
+        }else if(resultado == -1){
             Log.e("QUEDA:","Tamanho da janela ainda não é o ideal para detecção!");
-        }
-        if(resultado == -2){
+        }else if(resultado == -2){
+            new LogHelper().cadastrarErro(contexto, "Detector de Queda", "Ultrapassou tamanho máximo da janela!");
             Log.e("QUEDA:","Ultrapassou tamanho máximo da janela!");
         }
     }
@@ -81,7 +110,7 @@ public class DetectorQueda implements SensorEventListener{
      * ainda não é ideal para verificação. -2 se ultrapassou o tamanho máximo da janela.
      * @author  Denis Magno.
      */
-    private int detectaQuedaLivre() {
+    private int detectaQuedaLivre(){
         //Verifica se janela já possui tamanho ideal para começar detecção.
         if(!this.verificaTamanhoJanela()) {
             return -1;
@@ -89,14 +118,14 @@ public class DetectorQueda implements SensorEventListener{
 
         //new LogHelper().cadastrarJanelaQueda(contexto, this.janela);
 
-        //Verifica se primeiro elemento inserido na janela atingiu aceleração baixa(Queda livre).
-        if(!(this.janela.get(this.maxJanela - 1).getMagnitudeAceleracao() < 0.2)){
+        //Verifica se elemento escolhido como inicial inserido na janela atingiu aceleração baixa(Queda livre).
+        if(!(this.janela.get(this.elementoInicial).getMagnitudeAceleracao() < 0.2)){
             //Log.e("ENTROU AQUI",this.janela.get(this.maxJanela - 1).getMagnitudeAceleracao().toString());
             return 0;
         }
 
         //Define que foi encontrado uma queda livre na janela e onde foi encontrada essa queda.
-        int quedaLivre = this.maxJanela - 1;
+        int quedaLivre = this.elementoInicial - 1;
 
         // Percorre janela inteira, até que encontre o elemento com menor valor de queda livre.
         while(quedaLivre >= 0){
@@ -139,6 +168,7 @@ public class DetectorQueda implements SensorEventListener{
         //  Verifica se ultrapassagem da aceleração da magnitude é alta o bastante para definirmos
         // como uma queda.
         if(this.janela.get(ultrapassagemMagnitude).getMagnitudeAceleracao() > 2){
+            new LogHelper().cadastrarJanelaQueda(this.contexto, this.janela);
             return 1;
         }else{
             return 0;
@@ -190,10 +220,13 @@ public class DetectorQueda implements SensorEventListener{
         }
     }
 
+    /**
+     *  Não implementado.
+     *
+     * @param sensor
+     * @param accuracy
+     * @author          Denis Magno
+     */
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        /*
-            Não implementado.
-         */
-    }
+    public void onAccuracyChanged(Sensor sensor, int accuracy) { }
 }

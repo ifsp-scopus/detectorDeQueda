@@ -24,8 +24,8 @@ public class Acelerometro {
     /**
      *  Calcula a magnitude da aceleração da possível queda utilizando dados do acelerômetro.
      *
-     * @return                  Magnitude da aceleração da possível queda.
-     * @author                  Denis Magno.
+     * @return  Magnitude da aceleração da possível queda.
+     * @author  Denis Magno.
      */
     private Double calculaMagnitudeAceleracao(){
         //Calcula magnitude da queda.
@@ -37,34 +37,6 @@ public class Acelerometro {
         Double aceleracao = magnitude / 9.80665;
 
         return aceleracao;
-    }
-
-    public Float getxAxis() {
-        return xAxis;
-    }
-
-    public void setxAxis(Float xAxis) {
-        this.xAxis = xAxis;
-    }
-
-    public Float getyAxis() {
-        return yAxis;
-    }
-
-    public void setyAxis(Float yAxis) {
-        this.yAxis = yAxis;
-    }
-
-    public Float getzAxis() {
-        return zAxis;
-    }
-
-    public void setzAxis(Float zAxis) {
-        this.zAxis = zAxis;
-    }
-
-    public Long getTempo() {
-        return tempo;
     }
 
     public Double getMagnitudeAceleracao() { return magnitudeAceleracao; }
