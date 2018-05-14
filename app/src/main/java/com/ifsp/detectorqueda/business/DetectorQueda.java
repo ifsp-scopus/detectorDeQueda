@@ -1,6 +1,7 @@
 package com.ifsp.detectorqueda.business;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,6 +9,8 @@ import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ifsp.detectorqueda.activities.AlertaQuedaActivity;
+import com.ifsp.detectorqueda.activities.DetectorActivity;
 import com.ifsp.detectorqueda.beans.Acelerometro;
 import com.ifsp.detectorqueda.helpers.LogHelper;
 
@@ -95,6 +98,9 @@ public class DetectorQueda implements SensorEventListener{
             new LogHelper().cadastrarQueda(contexto);
             Toast.makeText(this.contexto, "Queda detectada", Toast.LENGTH_SHORT).show();
             Log.e("QUEDA:","Queda detectada!");
+
+            Intent in = new Intent(this.contexto, AlertaQuedaActivity.class);
+            this.contexto.startActivity(in);
         }else if(resultado == -1){
             Log.e("QUEDA:","Tamanho da janela ainda não é o ideal para detecção!");
         }else if(resultado == -2){

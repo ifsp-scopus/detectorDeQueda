@@ -20,13 +20,19 @@
         </activity>
 
         <!-- DetectorActivity -->
-        <activity android:name=".activities.DetectorActivity"
+        <activity
+            android:name=".activities.DetectorActivity"
             android:parentActivityName=".activities.MainActivity">
 
             <!-- Meta-tag necessária para suportar api level 15 ou menor -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
+        </activity>
+
+        <!-- AlertaQuedaActivity -->
+        <activity
+            android:name=".activities.AlertaQuedaActivity">
         </activity>
     </application>
 
