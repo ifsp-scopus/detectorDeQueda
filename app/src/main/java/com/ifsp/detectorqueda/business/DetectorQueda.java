@@ -125,7 +125,7 @@ public class DetectorQueda implements SensorEventListener{
         //new LogHelper().cadastrarJanelaQueda(contexto, this.janela);
 
         //Verifica se elemento escolhido como inicial inserido na janela atingiu aceleração baixa(Queda livre).
-        if(!(this.janela.get(this.elementoInicial).getMagnitudeAceleracao() < 0.2)){
+        if(!(this.janela.get(this.elementoInicial).getMagnitudeAceleracao() < 0.3)){
             //Log.e("ENTROU AQUI",this.janela.get(this.maxJanela - 1).getMagnitudeAceleracao().toString());
             return 0;
         }

@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- ACTIVITIES -->
         <!-- MainActivity -->
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -34,6 +35,11 @@
         <activity
             android:name=".activities.AlertaQuedaActivity">
         </activity>
+
+        <!-- SERVICES -->
+        <!-- DetectorQuedaService -->
+        <service android:name=".services.DetectorQuedaService"
+            android:exported="false"/>
     </application>
 
 </manifest>
