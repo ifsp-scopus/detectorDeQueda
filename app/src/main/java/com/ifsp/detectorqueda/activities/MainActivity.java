@@ -8,7 +8,6 @@ import android.view.View;
 import com.ifsp.detectorqueda.R;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *  Inicia 'DetectorActivity'
+     *  Inicia o serviço de detecção de quedas
      *
      * @param view  Objeto que representa o botão que foi clicado.
      * @author      Denis Magno.

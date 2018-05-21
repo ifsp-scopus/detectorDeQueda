@@ -3,10 +3,8 @@ package com.ifsp.detectorqueda.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.ifsp.detectorqueda.R;
-import com.ifsp.detectorqueda.business.DetectorQueda;
 import com.ifsp.detectorqueda.services.DetectorQuedaService;
 
 public class DetectorActivity extends AppCompatActivity {
