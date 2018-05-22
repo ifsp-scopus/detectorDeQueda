@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Detector de queda</string>
+
+    <!-- MainActivity -->
+    <string name="main_btn_iniciardeteccao">Iniciar Detecção de Queda!</string>
+
+    <!-- DetectorActivity -->
+    <string name="detector_txt_informativo">Algoritmo de detecção de quedas em andamento...</string>
+
+    <!-- AlertaQuedaActivity -->
+    <string name="alertaqueda_txt_informativo">Foi detectada uma queda durante o processo!</string>
+    <string name="alertaqueda_txt_pergunta">Está tudo bem?</string>
+    <string name="alertaqueda_btn_resposta_s">Sim</string>
+    <string name="alertaqueda_btn_resposta_n">Não</string>
 </resources>
