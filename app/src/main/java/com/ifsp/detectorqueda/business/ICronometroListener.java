@@ -6,5 +6,5 @@ public interface ICronometroListener {
      *
      * @author      Denis Magno
      */
-    public void onTimeOut();
+    void onTimeOut();
 }

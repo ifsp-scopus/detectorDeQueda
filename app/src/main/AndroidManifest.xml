@@ -32,8 +32,7 @@
         </activity>
 
         <!-- AlertaQuedaActivity -->
-        <activity
-            android:name=".activities.AlertaQuedaActivity">
+        <activity android:name=".activities.AlertaQuedaActivity">
         </activity>
 
         <!-- SERVICES -->

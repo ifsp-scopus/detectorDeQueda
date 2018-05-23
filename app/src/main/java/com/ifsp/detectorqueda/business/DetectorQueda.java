@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ifsp.detectorqueda.activities.AlertaQuedaActivity;
-import com.ifsp.detectorqueda.activities.DetectorActivity;
 import com.ifsp.detectorqueda.beans.Acelerometro;
 import com.ifsp.detectorqueda.helpers.LogHelper;
 
@@ -100,6 +99,7 @@ public class DetectorQueda implements SensorEventListener{
             Log.e("QUEDA:","Queda detectada!");
 
             Intent in = new Intent(this.contexto, AlertaQuedaActivity.class);
+            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.contexto.startActivity(in);
         }else if(resultado == -1){
             Log.e("QUEDA:","Tamanho da janela ainda não é o ideal para detecção!");
@@ -233,8 +233,8 @@ public class DetectorQueda implements SensorEventListener{
     /**
      *  Não implementado.
      *
-     * @param sensor
-     * @param accuracy
+     * @param sensor    Não implementado
+     * @param accuracy  Não implementado
      * @author          Denis Magno
      */
     @Override
