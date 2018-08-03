@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorAlertQueda">#FF0000</color>
+    <color name="colorNotAlertQueda">#00FF00</color>
+
+    <color name="colorTextAlertQueda">#000000</color>
 </resources>

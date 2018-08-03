@@ -6,56 +6,138 @@
     android:layout_height="match_parent"
     tools:context=".activities.AlertaQuedaActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/alertaqueda_descriptionImage_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bNao"
+        android:background="@color/colorNotAlertQueda"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@string/alertaqueda_descriptionImage_background"
+        app:layout_constraintTop_toBottomOf="@id/bSim"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorAlertQueda"/>
+
+    <Button
+        android:id="@+id/bSim"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:onClick="onClickSim"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bNao" />
+
+    <Button
+        android:id="@+id/bNao"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:onClick="onClickNao"
+        android:background="@null"
+        app:layout_constraintTop_toBottomOf="@id/bSim"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
         android:text="@string/alertaqueda_txt_informativo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/bSim"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:id="@+id/tvPergunta"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
         android:text="@string/alertaqueda_txt_pergunta"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
-    <Button
-        android:id="@+id/bSim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:onClick="onClickSim"
-        android:text="@string/alertaqueda_btn_resposta_s"
+    <ImageView
+        android:id="@+id/imgStickStanding"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/alert_stickstanding"
+        android:contentDescription="@string/alertaqueda_descriptionImage_icons"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/bNao"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@id/imgGood"
+        app:layout_constraintTop_toTopOf="@id/bSim"
+        app:layout_constraintBottom_toBottomOf="@id/bSim"/>
 
-    <Button
-        android:id="@+id/bNao"
+    <ImageView
+        android:id="@+id/imgGood"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/alert_good"
+        android:contentDescription="@string/alertaqueda_descriptionImage_icons"
+        app:layout_constraintTop_toTopOf="@id/bSim"
+        app:layout_constraintBottom_toBottomOf="@id/bSim"
+        app:layout_constraintLeft_toRightOf="@id/imgStickStanding"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvBotaoSim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:onClick="onClickNao"
-        android:text="@string/alertaqueda_btn_resposta_n"
-        app:layout_constraintLeft_toLeftOf="@+id/bSim"
+        android:text="@string/alertaqueda_btn_resposta_s"
+        android:textColor="@color/colorTextAlertQueda"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imgGood"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="20dp"/>
+
+    <ImageView
+        android:id="@+id/imgStickFallen"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/alert_stickfallen"
+        android:contentDescription="@string/alertaqueda_descriptionImage_icons"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/imgBad"
+        app:layout_constraintTop_toTopOf="@id/bNao"
+        app:layout_constraintBottom_toBottomOf="@id/bNao"/>
+
+    <ImageView
+        android:id="@+id/imgBad"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/alert_bad"
+        android:contentDescription="@string/alertaqueda_descriptionImage_icons"
+        app:layout_constraintTop_toTopOf="@id/bNao"
+        app:layout_constraintBottom_toBottomOf="@id/bNao"
+        app:layout_constraintLeft_toRightOf="@id/imgStickFallen"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvBotaoNao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alertaqueda_btn_resposta_n"
+        android:textColor="@color/colorTextAlertQueda"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgBad"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/tvCronometro"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="wrap_content"
         android:text=""
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="@id/bNao"
+        android:layout_marginBottom="5dp" />
 </android.support.constraint.ConstraintLayout>

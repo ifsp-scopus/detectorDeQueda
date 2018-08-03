@@ -3,6 +3,7 @@ package com.ifsp.detectorqueda.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_alerta_queda);
 
         TextView tvCronometro = (TextView)this.findViewById(R.id.tvCronometro);

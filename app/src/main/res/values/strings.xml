@@ -10,6 +10,8 @@
     <!-- AlertaQuedaActivity -->
     <string name="alertaqueda_txt_informativo">Foi detectada uma queda durante o processo!</string>
     <string name="alertaqueda_txt_pergunta">Está tudo bem?</string>
-    <string name="alertaqueda_btn_resposta_s">Sim</string>
-    <string name="alertaqueda_btn_resposta_n">Não</string>
+    <string name="alertaqueda_btn_resposta_s">Estou bem</string>
+    <string name="alertaqueda_btn_resposta_n">Não estou bem</string>
+    <string name="alertaqueda_descriptionImage_icons">Icone de resposta</string>
+    <string name="alertaqueda_descriptionImage_background">Background do botão</string>
 </resources>
