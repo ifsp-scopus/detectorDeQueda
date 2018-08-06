@@ -1,13 +1,9 @@
 package com.ifsp.detectorqueda.activities;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,14 +11,15 @@ import android.widget.Toast;
 import com.ifsp.detectorqueda.R;
 import com.ifsp.detectorqueda.business.CronometroAsync;
 import com.ifsp.detectorqueda.business.ICronometroListener;
+import com.ifsp.detectorqueda.services.AlertaService;
 
 public class AlertaQuedaActivity extends AppCompatActivity implements ICronometroListener{
     private Button btnSim;
     private Button btnNao;
     private TextView txtCronometro;
 
+    private Intent servicoAlerta;
     private CronometroAsync cronometro;
-    private Vibrator vibrate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +27,18 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
         getSupportActionBar().hide();
         setContentView(R.layout.activity_alerta_queda);
 
-        this.vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        iniciarComponentesGraficos();
 
-        inicializaComponentesGraficos();
-
+        //Inicia e executa cronometro definindo segundos a serem contados.
         this.cronometro = new CronometroAsync(this, txtCronometro);
-
-        //Executa cronometro definindo segundos a serem contados.
         this.cronometro.execute(60);
-        this.iniciarVibracao();
+
+        //Inicia e executa serviço de alerta (Sonoro e vibração)
+        this.servicoAlerta = new Intent(this, AlertaService.class);
+        this.startService(this.servicoAlerta);
     }
 
-    private void inicializaComponentesGraficos(){
+    private void iniciarComponentesGraficos(){
         this.txtCronometro = (TextView)this.findViewById(R.id.txtCronometro);
 
         /**
@@ -84,23 +81,6 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
     }
 
     /**
-     *  Inicia vibração do Smartphone.
-     *
-     * @author      Denis Magno
-     */
-    public void iniciarVibracao(){
-        long[] timings = {0, 1000, 100};
-
-        // Vibrate for 500 milliseconds
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrate.vibrate(VibrationEffect.createWaveform(timings, 0));
-        }else{
-            //deprecated in API 26
-            vibrate.vibrate(timings, 0);
-        }
-    }
-
-    /**
      *  Para cronômetro.
      *
      * @author Denis Magno
@@ -109,7 +89,7 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
     protected void onDestroy(){
         super.onDestroy();
         this.cronometro.cancel(true);
-        this.vibrate.cancel();
         Toast.makeText(this, "Cronômetro parado!", Toast.LENGTH_SHORT).show();
+        this.stopService(this.servicoAlerta);
     }
 }

@@ -44,6 +44,10 @@
         <!-- DetectorQuedaService -->
         <service android:name=".services.DetectorQuedaService"
             android:exported="false"/>
+
+        <!-- AlertaService -->
+        <service android:name=".services.AlertaService"
+            android:exported="false"/>
     </application>
 
 </manifest>
