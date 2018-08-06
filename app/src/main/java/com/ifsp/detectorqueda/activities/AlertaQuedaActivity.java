@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,10 @@ import com.ifsp.detectorqueda.business.CronometroAsync;
 import com.ifsp.detectorqueda.business.ICronometroListener;
 
 public class AlertaQuedaActivity extends AppCompatActivity implements ICronometroListener{
+    private Button btnSim;
+    private Button btnNao;
+    private TextView txtCronometro;
+
     private CronometroAsync cronometro;
     private Vibrator vibrate;
 
@@ -25,37 +30,45 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
         getSupportActionBar().hide();
         setContentView(R.layout.activity_alerta_queda);
 
-        TextView tvCronometro = (TextView)this.findViewById(R.id.tvCronometro);
-
         this.vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        this.cronometro = new CronometroAsync(this, tvCronometro);
+        inicializaComponentesGraficos();
+
+        this.cronometro = new CronometroAsync(this, txtCronometro);
 
         //Executa cronometro definindo segundos a serem contados.
         this.cronometro.execute(60);
         this.iniciarVibracao();
     }
 
-    /**
-     *  Informa que possível queda foi um falso positivo ou está tudo bem.
-     *
-     * @param view  Objeto que representa o botão que foi clicado.
-     * @author      Denis Magno
-     */
-    public void onClickSim(View view){
-        Toast.makeText(this, "Ok. Desculpe-nos pelo incomodo.", Toast.LENGTH_SHORT).show();
-        this.finish();
-    }
+    private void inicializaComponentesGraficos(){
+        this.txtCronometro = (TextView)this.findViewById(R.id.txtCronometro);
 
-    /**
-     *  Confirma que houve uma queda.
-     *
-     * @param view  Objeto que representa o botão que foi clicado.
-     * @author      Denis Magno
-     */
-    public void onClickNao(View view){
-        Toast.makeText(this, "Será enviado um alerta sobre sua condição.", Toast.LENGTH_SHORT).show();
-        this.finish();
+        /**
+         *  Informa que possível queda foi um falso positivo ou está tudo bem.
+         */
+        this.btnSim = (Button) findViewById(R.id.btnSim);
+        this.btnSim.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(AlertaQuedaActivity.this, "Ok. Desculpe-nos pelo incomodo.", Toast.LENGTH_SHORT).show();
+                finish();
+                return false;
+            }
+        });
+
+        /**
+         *  Confirma que houve uma queda.
+         */
+        this.btnNao = (Button) findViewById(R.id.btnNao);
+        this.btnNao.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(AlertaQuedaActivity.this, "Será enviado um alerta sobre sua condição.", Toast.LENGTH_SHORT).show();
+                finish();
+                return false;
+            }
+        });
     }
 
     /**

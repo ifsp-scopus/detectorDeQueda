@@ -14,4 +14,5 @@
     <string name="alertaqueda_btn_resposta_n">Não estou bem</string>
     <string name="alertaqueda_descriptionImage_icons">Icone de resposta</string>
     <string name="alertaqueda_descriptionImage_background">Background do botão</string>
+    <string name="alertaqueda_descriptionBtns">(Mantenha pressionado)</string>
 </resources>
