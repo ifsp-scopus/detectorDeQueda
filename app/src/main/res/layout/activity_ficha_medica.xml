@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FichaMedicaActivity"
+    android:background="#ececec">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/imgAlert"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/alert_medicalfile"
+            android:contentDescription="@string/fichamedica_descriptionImage_icon"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTituloFichaMedica"
+            android:text="@string/fichamedica_txt_titulo"/>
+
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorQuebraFichaMedica"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryTextFichaMedica"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaDataNascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/colorSecondaryTextFichaMedica"
+                android:layout_marginEnd="5dp"
+                android:text="@string/fichamedica_txt_sangue"/>
+
+            <TextView
+                android:id="@+id/txtFichaMedicaSangue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/colorSecondaryTextFichaMedica"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txtFichaMedicaPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/colorSecondaryTextFichaMedica"/>
+            <TextView
+                android:id="@+id/txtFichaMedicaAltura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/colorSecondaryTextFichaMedica"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaEndereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorQuebraFichaMedica"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorTituloFichaMedica"
+            android:text="@string/fichamedica_txt_alergias"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaAlergias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorQuebraFichaMedica"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorTituloFichaMedica"
+            android:text="@string/fichamedica_txt_medicamentos"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaMedicamentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorQuebraFichaMedica"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorTituloFichaMedica"
+            android:text="@string/fichamedica_txt_contatos"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaParentesco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaNomeContato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+        <TextView
+            android:id="@+id/txtFichaMedicaTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorSecondaryTextFichaMedica"/>
+
+    </LinearLayout>
+
+</ScrollView>

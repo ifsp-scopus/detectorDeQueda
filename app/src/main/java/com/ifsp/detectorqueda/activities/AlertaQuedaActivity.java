@@ -33,7 +33,7 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
 
         //Inicia e executa cronometro definindo segundos a serem contados.
         this.cronometro = new CronometroAsync(this, txtCronometro);
-        this.cronometro.execute(60);
+        this.cronometro.execute(10);
 
         //Inicia e executa serviço de alerta (Sonoro e vibração)
         this.servicoAlerta = new Intent(this, AlertaService.class);
@@ -83,7 +83,11 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
     @Override
     public void onTimeOut() {
         Toast.makeText(this, "Tempo esgotado!", Toast.LENGTH_SHORT).show();
-        this.finish();
+
+        Intent in = new Intent(this, FichaMedicaActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(in);
+        finish();
     }
 
     /**

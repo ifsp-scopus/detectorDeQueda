@@ -8,4 +8,9 @@
     <color name="colorNotAlertQueda">#00FF00</color>
 
     <color name="colorTextAlertQueda">#000000</color>
+
+    <color name="colorTituloFichaMedica">#d40000</color>
+    <color name="colorQuebraFichaMedica">#b3b3b3</color>
+    <color name="colorPrimaryTextFichaMedica">#000000</color>
+    <color name="colorSecondaryTextFichaMedica">#333333</color>
 </resources>

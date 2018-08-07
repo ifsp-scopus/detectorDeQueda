@@ -15,4 +15,12 @@
     <string name="alertaqueda_descriptionImage_icons">Icone de resposta</string>
     <string name="alertaqueda_descriptionImage_background">Background do botão</string>
     <string name="alertaqueda_descriptionBtns">(Mantenha pressionado)</string>
+
+    <!-- FichaMedicaActivity -->
+    <string name="fichamedica_descriptionImage_icon">Icone de alerta</string>
+    <string name="fichamedica_txt_titulo">Preciso de Ajuda</string>
+    <string name="fichamedica_txt_sangue">Grupo sanguíneo:</string>
+    <string name="fichamedica_txt_alergias">Alergías e Reações</string>
+    <string name="fichamedica_txt_medicamentos">Medicamentos</string>
+    <string name="fichamedica_txt_contatos">Contatos de emergência</string>
 </resources>
