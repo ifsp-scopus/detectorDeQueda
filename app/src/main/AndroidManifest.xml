@@ -6,6 +6,8 @@
 
     <!-- Vibração do Smartphone -->
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- Envio de mensagens -->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -47,6 +49,10 @@
 
         <!-- AlertaService -->
         <service android:name=".services.AlertaService"
+            android:exported="false"/>
+
+        <!-- EnvioMensagemService -->
+        <service android:name=".services.EnvioMensagemService"
             android:exported="false"/>
     </application>
 

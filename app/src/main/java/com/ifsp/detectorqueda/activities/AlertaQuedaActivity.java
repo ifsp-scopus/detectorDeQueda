@@ -12,6 +12,7 @@ import com.ifsp.detectorqueda.R;
 import com.ifsp.detectorqueda.business.CronometroAsync;
 import com.ifsp.detectorqueda.business.ICronometroListener;
 import com.ifsp.detectorqueda.services.AlertaService;
+import com.ifsp.detectorqueda.services.EnvioMensagemService;
 
 public class AlertaQuedaActivity extends AppCompatActivity implements ICronometroListener{
     private Button btnSim;
@@ -19,6 +20,7 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
     private TextView txtCronometro;
 
     private Intent servicoAlerta;
+    private Intent servicoEnvioMensagem;
     private CronometroAsync cronometro;
 
     @Override
@@ -36,6 +38,9 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
         //Inicia e executa serviço de alerta (Sonoro e vibração)
         this.servicoAlerta = new Intent(this, AlertaService.class);
         this.startService(this.servicoAlerta);
+
+        //Inicia serviço envio de mensagens
+        this.servicoEnvioMensagem = new Intent(this, EnvioMensagemService.class);
     }
 
     private void iniciarComponentesGraficos(){
@@ -62,6 +67,7 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(AlertaQuedaActivity.this, "Será enviado um alerta sobre sua condição.", Toast.LENGTH_SHORT).show();
+                startService(servicoEnvioMensagem);
                 finish();
                 return false;
             }
@@ -91,5 +97,6 @@ public class AlertaQuedaActivity extends AppCompatActivity implements ICronometr
         this.cronometro.cancel(true);
         Toast.makeText(this, "Cronômetro parado!", Toast.LENGTH_SHORT).show();
         this.stopService(this.servicoAlerta);
+        this.stopService(this.servicoEnvioMensagem);
     }
 }
